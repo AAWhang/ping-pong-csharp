@@ -6,7 +6,7 @@ class Program
 {
   static void Main()
   {
-    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome");
+    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome, 6: Binary");
 
     string progChoice = Console.ReadLine();
     if(progChoice == "1"){
@@ -19,6 +19,8 @@ class Program
       clockHands();
     } else if(progChoice == "5"){
       palendrome();
+    } else if(progChoice == "6"){
+      Binary();
     }
   }
 
@@ -39,6 +41,9 @@ class Program
         Console.WriteLine(i.ToString());
       }
     }
+    Console.WriteLine("Press enter to return to the main menu.");
+    Console.ReadLine();
+    Main();
   }
 
 
@@ -100,6 +105,9 @@ class Program
       Console.WriteLine("Queen stares longingly at pawn");
     }
 
+    Console.WriteLine("Press enter to return to the main menu.");
+    Console.ReadLine();
+    Main();
 
   }
 
@@ -147,6 +155,10 @@ class Program
       resultDegree = 360 - resultDegree;
     }
     Console.WriteLine(resultDegree);
+
+    Console.WriteLine("Press enter to return to the main menu.");
+    Console.ReadLine();
+    Main();
   }
 
   static void palendrome()
@@ -178,6 +190,41 @@ class Program
     } else {
       Console.WriteLine("This is not a palendrome. Bummer :(");
     }
+
+    Console.WriteLine("Press enter to return to the main menu.");
+    Console.ReadLine();
+    Main();
+  }
+
+  static void Binary()
+  {
+    Console.WriteLine("Please enter a number to make binary!");
+    int userNum = int.Parse(Console.ReadLine());
+    int maxLength = 0;
+    int maxBin = 1;
+    int realBin = 1;
+
+    while (maxBin <= userNum) {
+      maxLength++;
+      realBin = maxBin;
+      maxBin *= 2;
+    }
+
+
+
+    for (int numLength = maxLength; numLength > 0; numLength--) {
+      if (realBin <= userNum) {
+        Console.Write("1");
+        userNum -= realBin;
+      } else {
+        Console.Write("0");
+      }
+      realBin /= 2;
+    }
+    Console.WriteLine("");
+    Console.WriteLine("Press enter to return to the main menu.");
+    Console.ReadLine();
+    Main();
   }
 
 }
