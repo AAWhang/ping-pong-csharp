@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 class Program
 {
   static void Main()
   {
-    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands");
+    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome");
 
     string progChoice = Console.ReadLine();
     if(progChoice == "1"){
@@ -16,6 +17,8 @@ class Program
       Queens();
     } else if(progChoice == "4"){
       clockHands();
+    } else if(progChoice == "5"){
+      palendrome();
     }
   }
 
@@ -146,5 +149,35 @@ class Program
     Console.WriteLine(resultDegree);
   }
 
+  static void palendrome()
+  {
+    Regex rx = new Regex("[^a-zA-Z0-9 -]");
+
+    Console.WriteLine("Please enter a word to check for palendrome status:");
+    string str = Console.ReadLine();
+
+    Console.WriteLine("Press enter to remove non alphanumeric characters.");
+    Console.ReadLine();
+
+    str = rx.Replace(str, "");
+    Console.WriteLine(str);
+
+    Console.WriteLine("Press enter to reverse string.");
+    Console.ReadLine();
+
+    char[] wordOriginal = str.ToCharArray();
+    char[] wordReversed = new char[wordOriginal.Length];
+    for (int i = 0, j = str.Length - 1; i < str.Length; i++, j--) {
+        wordReversed[i] = wordOriginal[j];
+    }
+    string result = new string(wordReversed);
+    Console.WriteLine(result);
+
+    if(str == result){
+      Console.WriteLine("This string is a palendrome. Very cool");
+    } else {
+      Console.WriteLine("This is not a palendrome. Bummer :(");
+    }
+  }
 
 }
