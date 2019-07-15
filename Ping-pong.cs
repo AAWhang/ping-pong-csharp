@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
@@ -37,48 +38,42 @@ class Program
     }
   }
 
+
   static void Sphynx()
   {
     string result = SphynxQuestions();
     Console.WriteLine(result);
+    Console.WriteLine("Press enter to return to the main menu.");
     Console.ReadLine();
+    Main();
 
   }
 
   static string SphynxQuestions()
   {
+    Random random = new Random();
+    List<string> questions = new List<string>(new string[] {"What is the creature that walks on four legs in the morning, two legs at noon and three in the evening?", "What is a man?", "Say yes"});
+    List<string> answers = new List<string>(new string[] {"man", "a miserable pile of secrets", "yes"});
     string win = "you survive!";
     string lose = "You died!";
+    int rand = random.Next(3);
     Console.WriteLine("Answer the riddles correctly to survive!");
-    Console.WriteLine("What is the creature that walks on four legs in the morning, two legs at noon and three in the evening?");
-    string answer1 = Console.ReadLine().ToLower();
-    if(answer1 == "man"){
-      Console.WriteLine("Correct...");
-    } else {
-      Console.WriteLine("WRONG! *The Sphynx eats you whole*");
-      return lose;
+    int i = 0;
+    while (i < 3) {
+      Console.WriteLine(questions[rand]);
+      string answer1 = Console.ReadLine().ToLower();
+      if(answer1 == answers[rand]){
+        Console.WriteLine("Correct...");
+        rand = random.Next(3);
+        i++;
+      } else {
+        Console.WriteLine("WRONG! *The Sphynx eats you whole*");
+        return lose;
+      }
     }
-
-    Console.WriteLine("What is a man?");
-    string answer2 = Console.ReadLine().ToLower();
-    if(answer2 == "a miserable pile of secrets"){
-      Console.WriteLine("Correct...");
-    } else {
-      Console.WriteLine("WRONG! *The Sphynx eats you whole*");
-      return lose;
-    }
-
-    Console.WriteLine("Say yes");
-    string answer3 = Console.ReadLine().ToLower();
-    if(answer3 == "yes"){
-      Console.WriteLine("Correct... *Sphynx commits sudoku*");
-      return win;
-    } else {
-      Console.WriteLine("WRONG! *The Sphynx eats you whole*");
-      return lose;
-    }
-
+    return win;
   }
+
 
   static void Queens()
   {
