@@ -4,7 +4,7 @@ class Program
 {
   static void Main()
   {
-    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck");
+    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands");
 
     string progChoice = Console.ReadLine();
     if(progChoice == "1"){
@@ -13,6 +13,8 @@ class Program
       Sphynx();
     } else if(progChoice == "3"){
       Queens();
+    } else if(progChoice == "4"){
+      clockHands();
     }
   }
 
@@ -110,6 +112,43 @@ class Program
     } else {
       return num2 - num1;
     }
+  }
+
+  static float negativeFloat(float num1, float num2)
+  {
+    if (num1 > num2){
+      return num1 - num2;
+    } else {
+      return num2 - num1;
+    }
+  }
+
+  static void clockHands()
+  {
+    Console.WriteLine("Enter time!");
+    Console.WriteLine("Hour:");
+    float hour = float.Parse(Console.ReadLine());
+    while (hour <= 0 || hour > 12) {
+      Console.WriteLine("Enter Hour between 1-12 PLEASE:");
+      hour = float.Parse(Console.ReadLine());
+    }
+    Console.WriteLine("Minute:");
+    float minute = float.Parse(Console.ReadLine());
+    while (minute < 0 || minute > 59) {
+      Console.WriteLine("Enter minute between 0-59 PLEASE:");
+      minute = float.Parse(Console.ReadLine());
+    }
+    if (hour == 12){
+      hour = 0;
+    }
+
+    float minuteDegree = minute * 6;
+    float hourDegree = hour * 30 + (minute / 2);
+    float resultDegree = negativeFloat(minuteDegree,hourDegree);
+    if (resultDegree > 180){
+      resultDegree = 360 - resultDegree;
+    }
+    Console.WriteLine(resultDegree);
   }
 
 
