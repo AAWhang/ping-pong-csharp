@@ -6,7 +6,7 @@ class Program
 {
   static void Main()
   {
-    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome, 6: Binary, 7: High Low Game");
+    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome, 6: Binary, 7: High Low Game, 8: Rock-Paper-Scissors");
 
     string progChoice = Console.ReadLine();
     if(progChoice == "1"){
@@ -23,6 +23,8 @@ class Program
       Binary();
     } else if(progChoice == "7"){
       HighLow();
+    } else if(progChoice == "8"){
+      RockPaperScissors();
     }
   }
 
@@ -262,6 +264,67 @@ class Program
     Console.ReadLine();
     Main();
 
+  }
+
+  static void RockPaperScissors()
+  {
+    ConsoleKeyInfo moveA;
+    ConsoleKeyInfo moveB;
+    string move1 = "error: invalid move";
+    string move2 = "error: invalid move";
+
+    while(move1 == "error: invalid move" || move2 == "error: invalid move")
+    {
+      Console.WriteLine("Player 1 make your move:");
+      moveA = Console.ReadKey(true);
+      Console.WriteLine("Player 2 make your move:");
+      moveB = Console.ReadKey(true);
+      Console.WriteLine(moveA.Key.ToString());
+      Console.WriteLine(moveB.Key.ToString());
+      move1 = moveA.Key.ToString();
+      move2 = moveB.Key.ToString();
+      move1 = findMove(move1);
+      move2 = findMove(move2);
+      if(move1 == "error: invalid move" || move2 == "error: invalid move"){
+        Console.WriteLine("invalid move made, try again");
+      }
+    }
+    Console.WriteLine(winCheck(move1, move2));
+
+    Console.WriteLine("Play again? ( y / n )?");
+    string rpsChoice = Console.ReadLine();
+    if(rpsChoice == "y"){
+      RockPaperScissors();
+    } else {
+      Main();
+    }
+  }
+
+  static string findMove(string rawMove)
+  {
+    if(rawMove == "A" || rawMove == "LeftArrow") {
+      rawMove = "rock";
+    } else if (rawMove == "S" || rawMove == "DownArrow"){
+      rawMove = "paper";
+    } else if (rawMove == "D" || rawMove == "RightArrow"){
+      rawMove = "scissors";
+    } else {
+      rawMove = "error: invalid move";
+    }
+    return rawMove;
+  }
+
+  static string winCheck(string aMove, string bMove)
+  {
+    string winner;
+    if( (aMove == "rock" && bMove == "scissors") || (aMove == "paper" && bMove == "rock") || (aMove == "scissors" && bMove == "paper") ){
+      winner = "Player 1 wins!";
+    } else if (aMove == bMove) {
+      winner = "Tie game!";
+    } else {
+      winner = "Player 2 wins!";
+    }
+    return winner;
   }
 
 }
