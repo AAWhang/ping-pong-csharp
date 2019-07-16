@@ -6,7 +6,7 @@ class Program
 {
   static void Main()
   {
-    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome, 6: Binary");
+    Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome, 6: Binary, 7: High Low Game");
 
     string progChoice = Console.ReadLine();
     if(progChoice == "1"){
@@ -21,6 +21,8 @@ class Program
       palendrome();
     } else if(progChoice == "6"){
       Binary();
+    } else if(progChoice == "7"){
+      HighLow();
     }
   }
 
@@ -225,6 +227,41 @@ class Program
     Console.WriteLine("Press enter to return to the main menu.");
     Console.ReadLine();
     Main();
+  }
+
+  static void HighLow()
+  {
+    Random hiloRandom = new Random();
+    Console.WriteLine("Think of a number between 0-100.");
+    bool hiLo = false;
+    int min = 0;
+    int max = 101;
+    int hiloRand = hiloRandom.Next(min, max);
+    string answer;
+    while (hiLo == false) {
+      Console.WriteLine("Is your number higher or lower than " + hiloRand + "? (high/low/correct)");
+      answer = Console.ReadLine();
+      while (answer != "high" && answer != "low" && answer != "correct") {
+          Console.WriteLine("Please enter high low or correct.");
+          answer = Console.ReadLine();
+      }
+      if (min == max) {
+        hiLo = true;
+        Console.WriteLine("Your number is " + min);
+      } else if (answer == "high") {
+        min = hiloRand + 1;
+      } else if (answer == "low") {
+        max = hiloRand;
+      } else if (answer == "correct"){
+        hiLo = true;
+      }
+      hiloRand = hiloRandom.Next(min, max);
+    }
+    Console.WriteLine("I have learned what it is like to be a little more human.");
+    Console.WriteLine("Press enter to return to the main menu.");
+    Console.ReadLine();
+    Main();
+
   }
 
 }
