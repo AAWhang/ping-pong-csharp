@@ -275,16 +275,17 @@ class Program
 
     while(move1 == "error: invalid move" || move2 == "error: invalid move")
     {
-      Console.WriteLine("Player 1 make your move:");
+      Console.WriteLine("Player 1 make your move: (a:rock b:paper c:scissors)");
       moveA = Console.ReadKey(true);
-      Console.WriteLine("Player 2 make your move:");
+      Console.WriteLine("Player 2 make your move: (arrow keys left:rock down:paper right:scissors)");
       moveB = Console.ReadKey(true);
-      Console.WriteLine(moveA.Key.ToString());
-      Console.WriteLine(moveB.Key.ToString());
       move1 = moveA.Key.ToString();
       move2 = moveB.Key.ToString();
       move1 = findMove(move1);
-      move2 = findMove(move2);
+      move2 = findMove2(move2);
+      Console.WriteLine("____________________________________");
+      Console.WriteLine("Player 1 move: " + move1);
+      Console.WriteLine("Player 2 move: " + move2);
       if(move1 == "error: invalid move" || move2 == "error: invalid move"){
         Console.WriteLine("invalid move made, try again");
       }
@@ -302,11 +303,25 @@ class Program
 
   static string findMove(string rawMove)
   {
-    if(rawMove == "A" || rawMove == "LeftArrow") {
+    if(rawMove == "A") {
       rawMove = "rock";
-    } else if (rawMove == "S" || rawMove == "DownArrow"){
+    } else if (rawMove == "S"){
       rawMove = "paper";
-    } else if (rawMove == "D" || rawMove == "RightArrow"){
+    } else if (rawMove == "D"){
+      rawMove = "scissors";
+    } else {
+      rawMove = "error: invalid move";
+    }
+    return rawMove;
+  }
+
+  static string findMove2(string rawMove)
+  {
+    if(rawMove == "LeftArrow") {
+      rawMove = "rock";
+    } else if (rawMove == "DownArrow"){
+      rawMove = "paper";
+    } else if (rawMove == "RightArrow"){
       rawMove = "scissors";
     } else {
       rawMove = "error: invalid move";
