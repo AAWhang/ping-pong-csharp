@@ -10,7 +10,7 @@ namespace DoggyDogWorld
   {
     static void Main()
     {
-      Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome, 6: Binary, 7: High Low Game, 8: Rock-Paper-Scissors, 9: Wild Life Park");
+      Console.WriteLine("1: Ping-Pong, 2: Sphynx, 3: QueenCheck, 4: Clock Hands, 5: Palendrome, 6: Binary, 7: High Low Game, 8: Rock-Paper-Scissors, 9: Wild Life Park, 10: Prime Sifting");
 
       string progChoice = Console.ReadLine();
       if(progChoice == "1"){
@@ -31,6 +31,8 @@ namespace DoggyDogWorld
         RockPaperScissors();
       } else if(progChoice == "9"){
         WildlifePark();
+      } else if(progChoice == "10"){
+        PrimeSift();
       }
     }
 
@@ -485,6 +487,41 @@ namespace DoggyDogWorld
       } else {
 
       }
+    }
+
+    static void PrimeSift()
+    {
+      List<int> primes = new List<int>();
+      Console.WriteLine("Enter a number and primes less than that number will be displayed:");
+      int userPrimeMax = int.Parse(Console.ReadLine());
+
+      for(int i = 2; i <= userPrimeMax; i++)
+      {
+        primes.Add(i);
+      }
+
+      for(int j = 2; j <= userPrimeMax; j++)
+      {
+        primes = removecheck(j,primes);
+      }
+
+      for (int k = 0; k < primes.Count; k++) {
+        Console.WriteLine(primes[k]);
+      }
+      Console.WriteLine("Press enter to return to the main menu.");
+      Console.ReadLine();
+      Main();
+
+    }
+
+    static List<int> removecheck(int j, List<int> primes)
+    {
+          for(int elem = primes.Count - 1; elem >= 1; elem--) {
+            if (primes[elem] % j == 0 && j != primes[elem]) {
+              primes.RemoveAt(elem);
+            }
+          }
+          return primes;
     }
 
 
